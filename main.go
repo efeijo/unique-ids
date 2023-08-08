@@ -37,12 +37,3 @@ func main() {
 	}
 
 }
-
-type MyUniqueIdService struct {
-	id int64
-	Ch chan int64
-}
-
-func NewMyUniqueService() {
-
-}
