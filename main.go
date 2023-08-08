@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/rpc"
-	"time"
 
 	maelstrom "github.com/jepsen-io/maelstrom/demo/go"
 )
@@ -26,18 +25,11 @@ func main() {
 
 		var id int64
 		err = client.Call("IdGen.GenerateIds", struct{}{}, &id)
-		if err != nil {
-			time.Sleep(2 * time.Second)
-			client.Call("IdGen.GenerateIds", struct{}{}, &id)
-		}
+
 		body["type"] = "generate_ok"
 		body["id"] = id
 
-		err = n.Reply(msg, body)
-		if err != nil {
-			client.Call("IdGen.ErrorDecrement", struct{}{}, struct{}{})
-		}
-		return nil
+		return n.Reply(msg, body)
 	})
 
 	if err := n.Run(); err != nil {

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net"
 	"net/http"
@@ -33,8 +32,9 @@ func NewIdGen() *IdGen {
 
 func (ig *IdGen) GenerateIds(args struct{}, reply *int64) error {
 	r := <-ig.idChannel
-	reply = &r
-	fmt.Println("Generated id:", *reply)
+	// simple bug man
+	// 	reply = &r :/
+	*reply = r
 	return nil
 }
 
