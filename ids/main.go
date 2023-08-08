@@ -7,8 +7,6 @@ import (
 	"net/rpc"
 )
 
-type Args struct{}
-
 type IdGen struct {
 	id        int64
 	idChannel chan int64
