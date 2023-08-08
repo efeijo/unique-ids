@@ -12,3 +12,6 @@ build:
 clean:
 	rm -rf bin 
 	rm -rf store
+
+debug:
+	${MAELSTROM_PATH} serve
